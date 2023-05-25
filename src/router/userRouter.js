@@ -4,7 +4,7 @@ const { createUser, getAll } = require('../controller/userController');
 const { validateToken } = require('../auth/generateToken');
 
 const userRouter = Express.Router();
-userRouter.post('/', verifyUser, createUser);
 userRouter.get('/', validateToken, getAll);
+userRouter.post('/', verifyUser, createUser);
 
 module.exports = userRouter;

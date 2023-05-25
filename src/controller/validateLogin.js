@@ -9,7 +9,7 @@ const login = async (req, res) => {
     message: 'Invalid fields',
   });
   }
-  const token = createToken(userFind);
+  const token = createToken(email);
   res.status(200).json({ token });
   };
   
