@@ -25,6 +25,7 @@ const getAll = async (_req, res) => {
 };
 
 const getOne = async (req, res) => {
+  //  console.log('xablau', req.params);
 const { id } = req.params;
 const userId = Number(id);
 const user = await getOneService(id);

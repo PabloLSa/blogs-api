@@ -18,7 +18,7 @@ const validateToken = async (req, res, next) => {
   }
    try {
     const decoded = Jwt.verify(token, secret);
-    console.log('xablau', decoded);
+    // console.log('xablau', decoded);
     const user = await getEmail(decoded.data);
     console.log(user);
     req.user = user;
