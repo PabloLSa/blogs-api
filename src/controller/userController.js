@@ -8,7 +8,7 @@ const { createToken } = require('../auth/generateToken');
 const createUser = async (req, res) => {
   const { displayName, email, password, image } = req.body;
   const user = await getEmail(email);
-  console.log(user, email);
+  // console.log(user, email);
   if (user !== null) return res.status(409).json({ message: 'User already registered' });
   await creatingUser(displayName, email, password, image);
   const token = createToken(email);

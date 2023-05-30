@@ -21,14 +21,13 @@ module.exports = (sequelize, DataTypes) => {
       field: 'user_id' // Renomeando a coluna para snake_case
     },
     published: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.STRING,
     },
     updated: {
-      type: DataTypes.DATE,
-      allowNull: false
+      type: DataTypes.STRING,
     }
   }, {
+    timestamps: false,
     underscored: true, // Definindo para que as colunas no banco de dados estejam em snake_case
     tableName: 'blog_posts' // Definindo o nome da tabela para 'blog_posts'
   });

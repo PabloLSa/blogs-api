@@ -5,12 +5,19 @@ const user = async (email, password) => {
     where: { email, password },
   });
 
-  return userFind;
+  if (!userFind) return null;
+
+  const response = {
+    email: userFind.dataValues.email,
+    id: userFind.dataValues.id,
+  };
+
+  return response;
 };
 
 const getEmail = async (email) => {
   const newUser = await User.findOne({ where: { email } });
-  console.log(newUser);
+  // console.log(newUser);
   return newUser;
 };
 
