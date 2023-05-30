@@ -7,4 +7,5 @@ const { verifyBlog } = require('../middlewares/post.middlewares');
 const postRouter = Express.Router();
 
 postRouter.post('/', validateToken, verifyBlog, checkCategory, postController.postBlog);
+postRouter.get('/', validateToken, postController.getAllPosts);
 module.exports = postRouter;

@@ -1,4 +1,4 @@
-const { post } = require('../services/post.service');
+const { post, getAllPost } = require('../services/post.service');
 
 const postBlog = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -14,4 +14,11 @@ if (response.type) return res.status(response.type).json({ message: response.mes
   //  console.log(email);
   // console.log(title, content, categoryIds);
 };
-module.exports = { postBlog };
+
+const getAllPosts = async (_req, res) => {
+  const posts = await getAllPost();
+  // console.log(postData);
+  return res.status(200).json(posts);
+};
+
+module.exports = { postBlog, getAllPosts };

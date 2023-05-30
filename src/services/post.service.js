@@ -1,4 +1,4 @@
-const { Category, BlogPost, PostCategory } = require('../models');
+const { Category, BlogPost, PostCategory, User } = require('../models');
 
 const verifyPostCategories = async (categoriesId) => {
   const response = await Category.findAll();
@@ -30,4 +30,24 @@ await Promise.all(
 return { type: null, message: response.dataValues };
 };
 
-module.exports = { post };
+const getAllPost = async () => {
+  const posts = await BlogPost.findAll({
+    include: [
+      {
+        model: User,
+        as: 'user',
+        attributes: ['id', 'displayName', 'email', 'image'],
+      },
+      {
+        model: Category,
+        as: 'categories',
+        attributes: ['id', 'name'],
+        through: { attributes: [] },
+      },
+    ],
+  });
+
+  return posts;
+};
+
+module.exports = { post, getAllPost };
