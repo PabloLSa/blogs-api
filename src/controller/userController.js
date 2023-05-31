@@ -2,7 +2,8 @@ const {
   getEmail, 
   getAllService, 
   getOneService, 
-  creatingUser } = require('../services/user.service');
+  creatingUser, 
+  destroyUser } = require('../services/user.service');
 const { createToken } = require('../auth/generateToken');
 
 const createUser = async (req, res) => {
@@ -35,8 +36,16 @@ const userData = { id: userId, displayName, email, image };
 return res.status(200).json(userData);
 };
 
+const deleteUser = async (req, res) => {
+  const { dataValues } = req.user;
+  const getPost = await destroyUser(dataValues.id);
+  if (getPost.type) return res.status(getPost.type).json({ message: getPost.message });
+  return res.status(204).end();
+};
+
 module.exports = {
   createUser,
   getAll,
   getOne,
+  deleteUser,
 };

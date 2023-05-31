@@ -36,9 +36,20 @@ const uSer = await User.findOne({ where: { id } });
 return uSer;
 };
 
+const destroyUser = async (id) => {
+  const userDelete = await User.findByPk(id);
+  if (userDelete.dataValues.id !== id) {
+   return { type: 401, message: 'Unauthorized user' };
+  }
+   await userDelete.destroy();
+   return { type: null };
+};
+
 module.exports = { 
   user, 
   creatingUser, 
   getAllService, 
   getEmail, 
-  getOneService };
+  getOneService,
+  destroyUser,
+ };

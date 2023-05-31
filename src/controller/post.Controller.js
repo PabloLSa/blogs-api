@@ -38,7 +38,7 @@ const updatePost = async (req, res) => {
 const deletePost = async (req, res) => {
   const { id } = req.params;
   const { dataValues } = req.user;
-  console.log('+++++++++', dataValues);
+  // console.log('+++++++++', dataValues);
   const getPost = await destroyPost(id, dataValues.id);
   if (getPost.type) return res.status(getPost.type).json({ message: getPost.message });
   return res.status(204).end();
