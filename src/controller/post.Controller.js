@@ -1,4 +1,5 @@
 const { post, getAllPost } = require('../services/post.service');
+const { updatedPost } = require('../services/updatePost.service');
 
 const postBlog = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -21,4 +22,16 @@ const getAllPosts = async (_req, res) => {
   return res.status(200).json(posts);
 };
 
-module.exports = { postBlog, getAllPosts };
+const updatePost = async (req, res) => {
+  const { id } = req.params;
+  const { title, content } = req.body;
+  const { dataValues } = req.user;
+  const postUpdate = await updatedPost(title, content, id, dataValues.id);
+  if (postUpdate.type) {
+    return res.status(postUpdate.type).json({ message: postUpdate.message });
+  }
+
+  return res.status(200).json(postUpdate);
+};
+
+module.exports = { postBlog, getAllPosts, updatePost };
