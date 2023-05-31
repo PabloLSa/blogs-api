@@ -1,5 +1,6 @@
 const { post, getAllPost } = require('../services/post.service');
 const { updatedPost } = require('../services/updatePost.service');
+const { destroyPost } = require('../services/post.service');
 
 const postBlog = async (req, res) => {
   const { title, content, categoryIds } = req.body;
@@ -34,4 +35,13 @@ const updatePost = async (req, res) => {
   return res.status(200).json(postUpdate);
 };
 
-module.exports = { postBlog, getAllPosts, updatePost };
+const deletePost = async (req, res) => {
+  const { id } = req.params;
+  const { dataValues } = req.user;
+  console.log('+++++++++', dataValues);
+  const getPost = await destroyPost(id, dataValues.id);
+  if (getPost.type) return res.status(getPost.type).json({ message: getPost.message });
+  return res.status(204).end();
+};
+
+module.exports = { postBlog, getAllPosts, updatePost, deletePost };

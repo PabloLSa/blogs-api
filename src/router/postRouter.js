@@ -10,6 +10,7 @@ const postRouter = Express.Router();
 
 postRouter.post('/', validateToken, verifyBlog, checkCategory, postController.postBlog);
 postRouter.put('/:id', validateToken, update, postController.updatePost);
+postRouter.delete('/:id', validateToken, postController.deletePost);
 postRouter.get('/', validateToken, postController.getAllPosts);
 postRouter.get('/:id', validateToken, getPostById);
 module.exports = postRouter;

@@ -50,4 +50,14 @@ const getAllPost = async () => {
   return posts;
 };
 
-module.exports = { post, getAllPost };
+const destroyPost = async (id, userId) => {
+  const postByid = await BlogPost.findByPk(id);
+  if (!postByid) return { type: 404, message: 'Post does not exist' };
+  if (postByid.dataValues.userId !== userId) {
+   return { type: 401, message: 'Unauthorized user' };
+  }
+   await postByid.destroy();
+   return { type: null };
+};
+
+module.exports = { post, getAllPost, destroyPost };
